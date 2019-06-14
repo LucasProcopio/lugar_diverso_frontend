@@ -8,21 +8,38 @@ class Navbar extends React.Component {
       <div className="nav-wrapper">
         <div className="item-wrapper">
           <div className="item">
-            <NavLink to="/">O LUGAR DIVERSO</NavLink>
+            <NavLink to="/home">
+              <span className="line-break">O LUGAR</span>
+              <span>DIVERSO</span>
+            </NavLink>
           </div>
           <div className="item">
-            <NavLink to="/poem">ESCREVA SUA POESIA </NavLink>
+            <span className="pipe-one" />
+            <NavLink to="/poem">
+              <span className="line-break">ESCREVA </span>
+              <span>SUA POESIA </span>
+            </NavLink>
           </div>
 
           <div className="item">
-            <NavLink to="/wall">MURAL</NavLink>
+            <NavLink to="/wall">
+              <span>MURAL</span>
+            </NavLink>
+            <span className="pipe-two" />
           </div>
           <div className="item">
-            <NavLink to="/event">EVENTOS</NavLink>
+            <NavLink to="/event">
+              <span>EVENTOS</span>
+            </NavLink>
           </div>
         </div>
         <div className="item logo">
-          LUGAR DI<span style={{ color: "red" }}>V</span>ERSO
+          <NavLink to="/">
+            <span className="first-line">LUGAR</span>{" "}
+            <span className="second-line">
+              DI<span style={{ color: "red" }}>V</span>ERSO
+            </span>
+          </NavLink>
         </div>
       </div>
     );
