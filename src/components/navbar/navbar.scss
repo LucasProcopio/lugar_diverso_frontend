@@ -1,0 +1,89 @@
+.nav-wrapper {
+  width: 90%;
+  height: 80px;
+  margin: auto;
+  position: relative;
+  .item-wrapper {
+    width: 100%;
+    height: 100%;
+    margin-top: 70px;
+    box-shadow: 1px 1px 6px 1px #3e3e3e;
+    border-radius: 16px;
+    background-image: linear-gradient(#ff3f40 10%, #de0101 50%, #ad0403 80%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .item {
+      margin-left: 40px;
+      margin-right: 40px;
+      text-align: center;
+      padding: 15px 20px;
+      position: relative;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+
+        .line-break {
+          display: block;
+        }
+      }
+      .pipe-one,
+      .pipe-two {
+        height: 50px;
+        width: 2px;
+        background-color: #f1f1f1;
+        display: block;
+        position: absolute;
+        top: 15.5%;
+        left: -25.5%;
+      }
+      .pipe-two {
+        top: 0%;
+        left: 135.5%;
+      }
+    }
+
+    .item:nth-child(2) {
+      margin-right: 125px;
+    }
+
+    .item:nth-child(3) {
+      margin-left: 125px;
+    }
+  }
+
+  .item.logo {
+    width: 190px;
+    height: 180px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 1px #232323;
+    background-image: radial-gradient(#8b8b8b 15%, #3c3c3c 60%);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 180px;
+    position: absolute;
+    top: -50px;
+    left: 43%;
+    a {
+      text-decoration: none;
+    }
+    .first-line {
+      font-family: "Staatliches", cursive;
+      display: block;
+      line-height: 136px;
+      height: 20px;
+      color: #fff;
+      font-size: 40px;
+      letter-spacing: 3px;
+    }
+    .second-line {
+      font-family: "Staatliches", cursive;
+      color: #fff;
+      font-size: 40px;
+      letter-spacing: 3px;
+    }
+  }
+}
