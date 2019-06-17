@@ -1,0 +1,118 @@
+.selection-content {
+  height: 60%;
+  padding: 10px;
+  margin-top: 20px;
+  width: 40%;
+  > h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #f1f1f1;
+  }
+  .selection-body {
+    width: 85%;
+    text-align: center;
+    margin: auto;
+    font-size: 20px;
+  }
+}
+
+.left-form {
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  label {
+    margin-right: 10px;
+    color: #f1f1f1;
+    display: inline-block;
+    width: 100px;
+    cursor: pointer;
+  }
+  .field {
+    margin-bottom: 15px;
+    .input-field {
+      width: 250px;
+      height: 30px;
+      border-radius: 2px;
+      border: none;
+      padding: 5px;
+      font-size: 14px;
+    }
+    .field-error {
+      text-align: right;
+      margin: 5px;
+      font-size: 14px;
+      color: #f1f1f1;
+      font-weight: bold;
+      word-spacing: 1.5px;
+    }
+  }
+}
+
+.right-form {
+  position: absolute;
+  top: 5%;
+  right: 2%;
+  label {
+    margin-right: 10px;
+    color: #f1f1f1;
+    display: inline-block;
+    width: 80px;
+    cursor: pointer;
+  }
+  .text-label {
+    vertical-align: top;
+  }
+  .field {
+    margin-bottom: 15px;
+    .textarea {
+      min-height: 230px;
+      max-height: 230px;
+      min-width: 250px;
+      max-width: 250px;
+    }
+    .input-field {
+      width: 250px;
+      height: 30px;
+      border-radius: 2px;
+      border: none;
+      padding: 5px;
+      font-size: 14px;
+    }
+    .field-error {
+      text-align: right;
+      margin: 5px;
+      font-size: 14px;
+      color: #f1f1f1;
+      font-weight: bold;
+      word-spacing: 1.5px;
+    }
+  }
+  .submit-btn {
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    width: 120px;
+    height: 40px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #f1f1f1;
+    letter-spacing: 1px;
+    background-image: linear-gradient(
+      92deg,
+      #d80000 15%,
+      #f75454e8,
+      #c30000 95%
+    );
+    float: right;
+  }
+}
+
+.poem-image {
+  position: absolute;
+  width: 290px;
+  height: 260px;
+  top: 15%;
+  left: 50%;
+  transform: translate(-45%, 0);
+}
