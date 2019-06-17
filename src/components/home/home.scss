@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-around;
 }
+
 .history {
   width: 100%;
   margin: 15px;
@@ -17,8 +18,15 @@
     margin-top: 20px;
     text-align: center;
     color: #f1f1f1;
+    position: relative;
+    .loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 100%);
+    }
     .history-desc {
-      color: #292929;
+      color: #131313;
       text-align: center;
       letter-spacing: 0.5px;
       word-spacing: 1px;
@@ -41,8 +49,16 @@
   color: #f1f1f1;
   .how-to-join {
     margin-top: 20px;
+    position: relative;
+    min-height: 100px;
+    .loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
     .join-desc {
-      color: #292929;
+      color: #131313;
       text-align: center;
       letter-spacing: 0.5px;
       word-spacing: 1px;
@@ -54,8 +70,15 @@
     text-align: center;
     margin-top: 120px;
     color: #f1f1f1;
+    position: relative;
+    .loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
     .contact-info {
-      color: #292929;
+      color: #131313;
       text-align: center;
       letter-spacing: 0.5px;
       word-spacing: 1px;
@@ -63,4 +86,12 @@
       font-size: 20px;
     }
   }
+}
+
+.sad-icon {
+  display: block;
+  /* text-align: center; */
+  margin: 10px auto;
+  fill: #ffad00;
+  font-size: 24px;
 }
