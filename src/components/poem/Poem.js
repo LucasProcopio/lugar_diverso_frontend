@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./poem.scss";
+import { createPoem } from "../../utils/api";
 
 const initialValues = {
   image: "",
@@ -45,24 +46,42 @@ class Poem extends React.Component {
               text: Yup.string().required("O texto do poema é obrigatório")
             })}
             onSubmit={values => {
-              alert(values.image);
-              setTimeout(() => {
-                alert(
-                  JSON.stringify(
-                    {
-                      values,
-                      fileName: values.image.name,
-                      type: values.image.type,
-                      size: `${values.image.size} bytes`
-                    },
-                    null,
-                    2
-                  )
-                );
-              }, 500);
+              // react sweat alert or awesome alert
+              // to inform the user that his poem will be uploaded
+              let data = new FormData();
+
+              data.append("image", values.image);
+              data.append("email", values.email);
+              data.append("phone", values.phone);
+              data.append("website", values.website);
+              data.append("title", values.title);
+              data.append("author", values.author);
+              data.append("text", values.text);
+              createPoem(data).then(
+                result => {
+                  console.log(result);
+                },
+                err => {
+                  console.log(err);
+                }
+              );
+
+              console.log(
+                JSON.stringify(
+                  {
+                    values,
+                    file: values.image,
+                    fileName: values.image.name,
+                    type: values.image.type,
+                    size: `${values.image.size} bytes`
+                  },
+                  null,
+                  2
+                )
+              );
             }}
           >
-            {({ isSubmitting, setFieldValue, values }) => (
+            {({ setFieldValue }) => (
               <Form>
                 <div className="left-form">
                   <div className="field">
