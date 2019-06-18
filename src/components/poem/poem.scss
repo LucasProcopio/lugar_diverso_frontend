@@ -20,12 +20,41 @@
   position: absolute;
   top: 50%;
   left: 2%;
-  label {
+  .poem-label {
     margin-right: 10px;
     color: #f1f1f1;
     display: inline-block;
     width: 100px;
     cursor: pointer;
+  }
+  .input-file {
+    width: 200px;
+    height: 30px;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 2px;
+    color: #777;
+    font-size: 14px;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 20px;
+  }
+  .loader {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+  }
+  .img-thumb-wrapper {
+    position: absolute;
+    border: 2px solid #f1f1f1;
+    top: 0%;
+    right: 0%;
+    width: 35px;
+    height: 35px;
+    .img-thumbnail {
+      width: 100%;
+      height: 100%;
+    }
   }
   .field {
     margin-bottom: 15px;
@@ -36,7 +65,12 @@
       border: none;
       padding: 5px;
       font-size: 14px;
+      overflow: hidden;
     }
+    .input-field.file {
+      display: none;
+    }
+
     .field-error {
       text-align: right;
       margin: 5px;
@@ -52,7 +86,7 @@
   position: absolute;
   top: 5%;
   right: 2%;
-  label {
+  .poem-label {
     margin-right: 10px;
     color: #f1f1f1;
     display: inline-block;

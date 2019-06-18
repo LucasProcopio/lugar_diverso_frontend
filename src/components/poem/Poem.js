@@ -3,9 +3,11 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./poem.scss";
 import { createPoem } from "../../utils/api";
+import Loader from "react-loader-spinner";
 
 const initialValues = {
   image: "",
+  fileName: "Carregar imagem",
   email: "",
   phone: "",
   website: "",
@@ -13,6 +15,52 @@ const initialValues = {
   author: "",
   text: ""
 };
+
+class Thumb extends React.Component {
+  state = {
+    loading: false,
+    thumb: undefined
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.image) {
+      return;
+    }
+
+    this.setState({ loading: true }, () => {
+      let reader = new FileReader();
+
+      reader.onloadend = () => {
+        this.setState({ loading: false, thumb: reader.result });
+      };
+
+      reader.readAsDataURL(nextProps.image);
+    });
+  }
+
+  render() {
+    const { image } = this.props;
+    const { loading, thumb } = this.state;
+
+    if (!image) {
+      return null;
+    }
+
+    if (loading) {
+      return (
+        <div className="loader">
+          <Loader type="Oval" color="#f1f1f1" height={30} width={30} />
+        </div>
+      );
+    }
+
+    return (
+      <div className="img-thumb-wrapper">
+        <img src={thumb} alt={image.name} className="img-thumbnail" />
+      </div>
+    );
+  }
+}
 
 class Poem extends React.Component {
   render() {
@@ -81,11 +129,16 @@ class Poem extends React.Component {
               );
             }}
           >
-            {({ setFieldValue }) => (
+            {({ setFieldValue, values }) => (
               <Form>
                 <div className="left-form">
                   <div className="field">
-                    <label htmlFor="image">IMAGEM</label>
+                    <label className="poem-label" htmlFor="image">
+                      IMAGEM
+                    </label>
+                    <label htmlFor="image" className="input-file">
+                      {values.fileName}
+                    </label>
                     <input
                       id="image"
                       className="input-field file"
@@ -93,11 +146,17 @@ class Poem extends React.Component {
                       type="file"
                       onChange={event => {
                         setFieldValue("image", event.currentTarget.files[0]);
+                        setFieldValue(
+                          "fileName",
+                          event.currentTarget.files[0].name
+                        );
                       }}
                     />
                   </div>
                   <div className="field">
-                    <label htmlFor="email">E-MAIL *</label>
+                    <label className="poem-label" htmlFor="email">
+                      E-MAIL *
+                    </label>
                     <Field
                       id="email"
                       className="input-field"
@@ -110,7 +169,9 @@ class Poem extends React.Component {
                     </ErrorMessage>
                   </div>
                   <div className="field">
-                    <label htmlFor="phone">TELEFONE *</label>
+                    <label className="poem-label" htmlFor="phone">
+                      TELEFONE *
+                    </label>
                     <Field
                       id="phone"
                       className="input-field"
@@ -123,7 +184,9 @@ class Poem extends React.Component {
                     </ErrorMessage>
                   </div>
                   <div className="field">
-                    <label htmlFor="website">SITE</label>
+                    <label className="poem-label" htmlFor="website">
+                      SITE
+                    </label>
                     <Field
                       id="website"
                       className="input-field"
@@ -132,10 +195,13 @@ class Poem extends React.Component {
                       placeholder="Site para divulgação pessoal"
                     />
                   </div>
+                  <Thumb image={values.image} />
                 </div>
                 <div className="right-form">
                   <div className="field">
-                    <label htmlFor="title">TITULO *</label>
+                    <label className="poem-label" htmlFor="title">
+                      TITULO *
+                    </label>
                     <Field
                       id="title"
                       className="input-field"
@@ -148,7 +214,9 @@ class Poem extends React.Component {
                     </ErrorMessage>
                   </div>
                   <div className="field">
-                    <label htmlFor="author">AUTOR *</label>
+                    <label className="poem-label" htmlFor="author">
+                      AUTOR *
+                    </label>
                     <Field
                       id="author"
                       className="input-field"
@@ -161,7 +229,7 @@ class Poem extends React.Component {
                     </ErrorMessage>
                   </div>
                   <div className="field">
-                    <label className="text-label" htmlFor="text">
+                    <label className="text-label poem-label" htmlFor="text">
                       TEXTO *
                     </label>
                     <Field

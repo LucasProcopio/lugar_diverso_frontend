@@ -45,7 +45,7 @@ img {
 // APP CONTAINER ======================
 .container {
   width: 87%;
-  height: 500px;
+  min-height: 500px;
   margin: auto;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
