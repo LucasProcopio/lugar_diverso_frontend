@@ -80,6 +80,17 @@ class Poem extends React.Component {
           <Formik
             initialValues={initialValues}
             validationSchema={Yup.object({
+              image: Yup.mixed()
+                .notRequired()
+                .test(
+                  "fileFormat",
+                  "Somente arquivos jpg e png sao suportados",
+                  value => {
+                    return ["image/jpg", "image/jpeg", "image/png"].includes(
+                      value.type
+                    );
+                  }
+                ),
               email: Yup.string()
                 .email("E-mail inválido")
                 .required("E-mail obrigatório"),
@@ -119,7 +130,6 @@ class Poem extends React.Component {
                   {
                     values,
                     file: values.image,
-                    fileName: values.image.name,
                     type: values.image.type,
                     size: `${values.image.size} bytes`
                   },
@@ -148,10 +158,15 @@ class Poem extends React.Component {
                         setFieldValue("image", event.currentTarget.files[0]);
                         setFieldValue(
                           "fileName",
-                          event.currentTarget.files[0].name
+                          event.currentTarget.files.length > 0
+                            ? event.currentTarget.files[0].name
+                            : "Carregar imagem"
                         );
                       }}
                     />
+                    <ErrorMessage name="image">
+                      {msg => <div className="field-error">{msg}</div>}
+                    </ErrorMessage>
                   </div>
                   <div className="field">
                     <label className="poem-label" htmlFor="email">
