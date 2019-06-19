@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto|Staatliches&display=swap");
 
+// APP RESET ===========================
 html,
 body {
   height: 100%;
@@ -39,4 +40,19 @@ ul {
 img {
   max-width: 100%;
   height: auto;
+}
+
+// APP CONTAINER ======================
+.container {
+  width: 87%;
+  min-height: 500px;
+  margin: auto;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-top: 0px;
+  box-shadow: 1px 1px 3px 1px #353535;
+  background-image: linear-gradient(#e00001 10%, #cc0000 50%, #a70100 80%);
+  display: flex;
+  justify-content: space-around;
+  position: relative;
 }

@@ -1,9 +1,17 @@
 import React from "react";
 import "./home.scss";
+import { fetchAbout, fecthContacts } from "./homeAction";
+
+import Loader from "react-loader-spinner";
+import { IoIosSad } from "react-icons/io";
+
+import { connect } from "react-redux";
+import { isEmpty } from "../../utils/helpers";
 
 class Home extends React.Component {
   componentDidMount() {
-    // fetch history, contact and how to join
+    this.props.fetchAboutData();
+    this.props.fetchContactData();
   }
   render() {
     return (
@@ -11,12 +19,22 @@ class Home extends React.Component {
         <div className="history">
           <div className="history-content">
             <h2>HISTÓRIA</h2>
-            <p className="history-desc">
-              Lorem ipsum dolor sit amet consectetu adipisicing elit. Facilis
-              molestias possimus incidunt quis inventore voluptatem vel maiores
-              voluptates, saepe explicabo est nihil aut excepturi, numquam
-              veniam vitae qui molestiae. Deleniti.
-            </p>
+            {this.props.showAboutLoading === true ? (
+              <div className="loader">
+                <Loader type="Grid" color="#f1f1f1" height={70} width={70} />
+              </div>
+            ) : (
+              <div className="history-desc">
+                {isEmpty(this.props.about) ? (
+                  <div>
+                    <IoIosSad className="sad-icon" />
+                    <span>Nenhuma informação para mostrar</span>
+                  </div>
+                ) : (
+                  this.props.about[0].history
+                )}
+              </div>
+            )}
           </div>
         </div>
         <div className="home-imgs">
@@ -30,15 +48,45 @@ class Home extends React.Component {
         <div className="home-info">
           <div className="how-to-join">
             <h2>COMO PARTICIPAR</h2>
-            <p className="join-desc">
-              Lorem ipsum dolor sit amet consectetu adipisicing elit. Facilis
-              molestias possimus incidunt quis inventore voluptatem vel maiores
-              voluptates, saepe explicabo
-            </p>
+            {this.props.showAboutLoading === true ? (
+              <div className="loader">
+                <Loader type="Grid" color="#f1f1f1" height={70} width={70} />
+              </div>
+            ) : (
+              <div className="join-desc">
+                {isEmpty(this.props.about) ? (
+                  <div>
+                    <IoIosSad className="sad-icon" />
+                    <span>Nenhuma informação para mostrar</span>
+                  </div>
+                ) : (
+                  this.props.about[0].join_desc
+                )}
+              </div>
+            )}
           </div>
           <div className="home-contact">
             <h2>CONTATO</h2>
-            <p className="contact-info">(XX) XXXX-XXXX hdusahdha@mail.com</p>
+            {this.props.showContactLoading === true ? (
+              <div className="loader">
+                <Loader type="Grid" color="#f1f1f1" height={70} width={70} />
+              </div>
+            ) : (
+              <div className="contact-info">
+                {this.props.contact.length === 0 ? (
+                  <div>
+                    <IoIosSad className="sad-icon" />
+                    <span>Nenhuma informação para mostrar</span>
+                  </div>
+                ) : (
+                  <div>
+                    {this.props.contact[0].phone}
+                    <br />
+                    {this.props.contact[0].email}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -46,4 +94,24 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  console.log(state.homeReducer);
+  return {
+    about: state.homeReducer.about,
+    contact: state.homeReducer.contact,
+    showAboutLoading:
+      typeof state.homeReducer.about === "undefined" ? true : false,
+    showContactLoading:
+      typeof state.homeReducer.contact === "undefined" ? true : false
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchAboutData: () => dispatch(fetchAbout()),
+  fetchContactData: () => dispatch(fecthContacts())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
