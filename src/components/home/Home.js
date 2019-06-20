@@ -95,7 +95,6 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.homeReducer);
   return {
     about: state.homeReducer.about,
     contact: state.homeReducer.contact,
