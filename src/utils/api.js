@@ -18,3 +18,7 @@ export function createPoem(data) {
   const config = { headers: { "Content-Type": "multipart/form-data" } };
   return axios.post(`${apiUrl}/create/poem`, data, config);
 }
+
+export function fetchEventsApi(page) {
+  return axios(`${apiUrl}/events/${page}`)
+}

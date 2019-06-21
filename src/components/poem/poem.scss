@@ -1,3 +1,9 @@
+.poem-wrapper {
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+}
 .selection-content {
   height: 60%;
   padding: 10px;
@@ -151,4 +157,64 @@
   top: 15%;
   left: 50%;
   transform: translate(-45%, 0);
+}
+
+// responsive design
+@media screen and (max-width: 1200px) {
+  .container {
+    font-size: 14px;
+    flex-direction: column;
+  }
+  .poem-image {
+    width: 40%;
+    position: initial;
+    transform: none;
+    margin: 10px auto;
+    top: unset;
+    left: unset;
+  }
+  .selection-content {
+    height: 60%;
+    margin-top: 60px;
+    width: 100%;
+  }
+  .form-wrapper {
+    margin: 40px auto;
+    width: 50%;
+  }
+  .left-form {
+    width: 100%;
+    position: initial;
+    top: unset;
+    left: unset;
+    .field {
+      .poem-label {
+        width: 30%;
+        margin: 10px 0;
+      }
+      .input-field {
+        width: 100%;
+      }
+    }
+  }
+  .right-form {
+    width: 100%;
+    position: initial;
+    top: unset;
+    left: unset;
+    .field {
+      .poem-label {
+        width: 30%;
+        margin: 10px 0;
+      }
+      .input-field {
+        width: 100%;
+      }
+      .textarea {
+        min-height: 300px;
+        min-width: 300px;
+        max-width: 100%;
+      }
+    }
+  }
 }
