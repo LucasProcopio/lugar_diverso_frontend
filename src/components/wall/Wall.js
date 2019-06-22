@@ -44,7 +44,7 @@ class Wall extends React.Component {
                   ) : null}
                   <div className="poem-body">
                     <h3>{poem.title}</h3>
-                    <p className="author">{poem.author}</p>
+                    <p className="author">Por: {poem.author}</p>
                     <p className="poem-text">
                       {poem.text.split("\n").map((item, key) => {
                         return (

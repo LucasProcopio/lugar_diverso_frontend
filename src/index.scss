@@ -41,7 +41,13 @@ img {
   max-width: 100%;
   height: auto;
 }
-
+// navbar
+.navbar {
+  display: block;
+}
+.mobile-navbar {
+  display: none;
+}
 // APP CONTAINER ======================
 .container {
   width: 87%;
@@ -55,4 +61,211 @@ img {
   display: flex;
   justify-content: space-around;
   position: relative;
+}
+
+// responsive design
+@media screen and (max-width: 1200px) {
+  .container {
+    font-size: 14px;
+    flex-direction: column;
+  }
+
+  // poem =======================
+  .poem-image {
+    width: 40%;
+    position: initial;
+    transform: none;
+    margin: 10px auto;
+    top: unset;
+    left: unset;
+  }
+  .selection-content {
+    height: 60%;
+    margin-top: 60px;
+    width: 100%;
+  }
+  .form-wrapper {
+    margin: 40px auto;
+    width: 50%;
+  }
+  .left-form {
+    width: 100%;
+    position: initial;
+    top: unset;
+    left: unset;
+    position: relative;
+    .field {
+      .poem-label {
+        width: 30%;
+        margin: 10px 0;
+      }
+      .input-field {
+        width: 100%;
+      }
+      .input-file {
+        width: 100%;
+      }
+    }
+    .img-thumb-wrapper {
+      top: -10%;
+      left: 0;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .right-form {
+    width: 100%;
+    position: initial;
+    top: unset;
+    left: unset;
+    .field {
+      .poem-label {
+        width: 30%;
+        margin: 10px 0;
+      }
+      .input-field {
+        width: 100%;
+      }
+      .textarea {
+        min-height: 300px;
+        min-width: 300px;
+        max-width: 100%;
+      }
+    }
+  }
+
+  // home =======================
+  .home-wrapper {
+    flex-direction: column;
+  }
+  .history {
+    .history-content {
+      margin-top: 60px;
+    }
+  }
+
+  .home-imgs {
+    .img-one,
+    .img-two {
+      margin: 10px 0;
+    }
+
+    .img-one {
+      > img {
+        width: 50%;
+      }
+    }
+
+    .img-two {
+      > img {
+        width: 50%;
+      }
+    }
+  }
+
+  .home-info {
+    .home-contact {
+      margin-top: unset;
+    }
+  }
+}
+
+@media screen and (max-width: 968px) {
+  // carousel =====================
+  .caroulsel-wrapper {
+    display: none;
+  }
+
+  // navigation bar ===============
+  .navbar {
+    display: none;
+  }
+  .mobile-navbar {
+    display: block;
+    top: 0;
+    position: absolute;
+  }
+
+  // main container ===============
+  .container {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  // event ========================
+  .event-container {
+    .event-wrapper {
+      .event {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .event-image {
+          width: 55%;
+        }
+        .event-content {
+          width: 55%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  // event ========================
+  .container {
+    position: absolute;
+    height: 100%;
+  }
+  .wall-container {
+    height: unset;
+  }
+  .event-container {
+    .event-wrapper {
+      .event {
+        .event-image {
+          width: 90%;
+        }
+        .event-content {
+          width: 90%;
+          .event-title {
+            font-size: 14px;
+            > span {
+              font-size: 18px;
+              font-weight: bold;
+            }
+          }
+          .event-info {
+            .event-list-info {
+              > li {
+                font-size: 14px;
+                span {
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // poem =====================
+  .poem-image {
+    width: 90%;
+    text-align: center;
+    > img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .form-wrapper {
+    width: 90%;
+  }
+  .right-form {
+    .field {
+      .textarea {
+        min-width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
 }
