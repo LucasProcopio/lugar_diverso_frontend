@@ -15,21 +15,37 @@ class Slider extends React.Component {
           interval={4500}
           stopOnHover={false}
           transitionTime={900}
-          dynamicHeight={true}
+          dynamicHeight={false}
           showArrows={false}
           showStatus={false}
         >
           <div>
-            <img src="images/slider/slider-1.jpeg" alt="slider 1" />
+            <img
+              src="images/slider/slider-1.jpeg"
+              height="850px"
+              alt="slider 1"
+            />
           </div>
           <div>
-            <img src="images/slider/slider-2.jpeg" alt="slider 2" />
+            <img
+              src="images/slider/slider-2.jpeg"
+              height="850px"
+              alt="slider 2"
+            />
           </div>
           <div>
-            <img src="images/slider/slider-3.jpeg" alt="slider 3" />
+            <img
+              src="images/slider/slider-3.jpeg"
+              height="850px"
+              alt="slider 3"
+            />
           </div>
           <div>
-            <img src="images/slider/slider-4.jpeg" alt="slider 4" />
+            <img
+              src="images/slider/slider-4.jpeg"
+              height="850px"
+              alt="slider 4"
+            />
           </div>
         </Carousel>
       </div>

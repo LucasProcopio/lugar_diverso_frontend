@@ -70,6 +70,9 @@ img {
     flex-direction: column;
   }
 
+  .footer {
+    display: none;
+  }
   // poem =======================
   .poem-image {
     width: 40%;
@@ -137,10 +140,32 @@ img {
   // home =======================
   .home-wrapper {
     flex-direction: column;
-  }
-  .history {
-    .history-content {
-      margin-top: 60px;
+    .history {
+      .history-content {
+        margin-top: 60px;
+        .loader {
+          position: unset;
+          margin: 30px;
+          transform: none;
+        }
+      }
+    }
+
+    .home-info {
+      .how-to-join {
+        .loader {
+          position: unset;
+          margin: 30px;
+          transform: none;
+        }
+      }
+      .home-contact {
+        .loader {
+          position: unset;
+          margin: 30px;
+          transform: none;
+        }
+      }
     }
   }
 

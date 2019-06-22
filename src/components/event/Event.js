@@ -30,7 +30,7 @@ class Event extends React.Component {
         <div className="event-wrapper">
           {this.props.showLoading === true ? (
             <div className="event-loading">
-              <Loader type="Grid" color="#f1f1f1" height={70} width={70} />
+              <Loader type="Grid" color="#f1f1f1" height={100} width={100} />
             </div>
           ) : (
             this.props.events.map(event => {

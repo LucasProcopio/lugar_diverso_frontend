@@ -31,7 +31,7 @@ class Wall extends React.Component {
           <div className="poems-wrapper">
             {this.props.showLoading === true ? (
               <div className="wall-loader">
-                <Loader type="Grid" color="#f1f1f1" height={70} width={70} />
+                <Loader type="Grid" color="#f1f1f1" height={100} width={100} />
               </div>
             ) : (
               this.props.poems.map((poem, index) => (

@@ -6,4 +6,5 @@ import Admin from "./components/admin/Admin";
 import Event from "./components/event/Event";
 import Wall from "./components/wall/Wall";
 import Slider from "./components/slider/Slider";
-export { Navbar, MobileNavBar, Home, Poem, Admin, Event, Wall, Slider };
+import Footer from "./components/footer/Footer";
+export { Navbar, MobileNavBar, Home, Poem, Admin, Event, Wall, Slider, Footer };

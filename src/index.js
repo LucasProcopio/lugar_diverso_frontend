@@ -14,7 +14,8 @@ import {
   Poem,
   Wall,
   Event,
-  Slider
+  Slider,
+  Footer
 } from "./components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.scss";
@@ -36,6 +37,7 @@ ReactDOM.render(
         <Route path="/poem" component={Poem} />
         <Route path="/wall" component={Wall} />
         <Route path="/event" component={Event} />
+        <Footer />
       </div>
     </Router>
   </Provider>,
