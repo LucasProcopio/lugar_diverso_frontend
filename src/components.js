@@ -7,4 +7,16 @@ import Event from "./components/event/Event";
 import Wall from "./components/wall/Wall";
 import Slider from "./components/slider/Slider";
 import Footer from "./components/footer/Footer";
-export { Navbar, MobileNavBar, Home, Poem, Admin, Event, Wall, Slider, Footer };
+import Login from "./components/Login/Login";
+export {
+  Navbar,
+  MobileNavBar,
+  Home,
+  Poem,
+  Admin,
+  Event,
+  Wall,
+  Slider,
+  Footer,
+  Login
+};

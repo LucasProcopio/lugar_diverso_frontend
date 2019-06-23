@@ -20,5 +20,27 @@ export function createPoem(data) {
 }
 
 export function fetchEventsApi(page) {
-  return axios(`${apiUrl}/events/${page}`)
+  return axios(`${apiUrl}/events/${page}`);
+}
+
+export function auth(data) {
+  const config = {
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true
+  };
+  return axios.post(`${apiUrl}/admin/auth`, data, config);
+}
+
+export function getAdmList() {
+  return axios.get(`${apiUrl}/admin/list`);
+}
+
+export function checkAuth(token) {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json"
+    }
+  };
+  return axios.get(`${apiUrl}/admin/check-token`, config);
 }

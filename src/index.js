@@ -15,7 +15,9 @@ import {
   Wall,
   Event,
   Slider,
-  Footer
+  Footer,
+  Admin,
+  Login
 } from "./components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.scss";
@@ -37,6 +39,8 @@ ReactDOM.render(
         <Route path="/poem" component={Poem} />
         <Route path="/wall" component={Wall} />
         <Route path="/event" component={Event} />
+        <Route path="/admin" component={Admin} />
+        <Route path="/login" component={Login} />
         <Footer />
       </div>
     </Router>
