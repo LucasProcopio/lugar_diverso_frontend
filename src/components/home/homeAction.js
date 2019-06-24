@@ -1,6 +1,7 @@
 import { fetchAboutApi, fetchContactApi } from "../../utils/api";
 export const FETCH_ABOUT = "FETCH_ABOUT";
 export const FETCH_CONTACT = "FETCH_CONTACT";
+export const NETWORK_ERROR = "NETWORK_ERROR";
 
 export const fetchAbout = () => {
   return dispatch => {
@@ -9,7 +10,11 @@ export const fetchAbout = () => {
         dispatch(fetchAboutSuccess(response.data));
       })
       .catch(err => {
-        throw err;
+        // create a function helper to haandle multiple status errors
+        if (!err.status) {
+          const error = "Servidor indisponível";
+          dispatch(netWorkError(error));
+        }
       });
   };
 };
@@ -21,11 +26,25 @@ export function fetchAboutSuccess(about) {
   };
 }
 
+export function netWorkError(error) {
+  return {
+    type: NETWORK_ERROR,
+    error
+  };
+}
+
 export const fecthContacts = () => {
   return dispatch => {
-    return fetchContactApi().then(response => {
-      dispatch(fetchContactSuccess(response.data));
-    });
+    return fetchContactApi()
+      .then(response => {
+        dispatch(fetchContactSuccess(response.data));
+      })
+      .catch(err => {
+        if (!err.status) {
+          const error = "Servidor indisponível";
+          dispatch(netWorkError(error));
+        }
+      });
   };
 };
 

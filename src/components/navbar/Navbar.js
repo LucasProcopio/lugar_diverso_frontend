@@ -8,7 +8,7 @@ class Navbar extends React.Component {
       <div className="nav-wrapper">
         <div className="item-wrapper">
           <div className="item">
-            <NavLink to="/home">
+            <NavLink to="/">
               <span className="line-break">O LUGAR</span>
               <span>DIVERSO</span>
             </NavLink>
@@ -34,12 +34,10 @@ class Navbar extends React.Component {
           </div>
         </div>
         <div className="item logo">
-          <NavLink to="/">
-            <span className="first-line">LUGAR</span>{" "}
-            <span className="second-line">
-              DI<span style={{ color: "red" }}>V</span>ERSO
-            </span>
-          </NavLink>
+          <span className="first-line">LUGAR</span>{" "}
+          <span className="second-line">
+            DI<span style={{ color: "red" }}>V</span>ERSO
+          </span>
         </div>
       </div>
     );

@@ -1,0 +1,24 @@
+.footer-container {
+  display: flex;
+  justify-content: center;
+  color: #f1f1f1;
+  margin: 25px;
+  .footer-contact,
+  .instagram,
+  .address-footer {
+    border-right: 1px solid #f1f1f1;
+    padding-right: 10px;
+  }
+  .instagram,
+  .address-footer,
+  .city {
+    padding-left: 10px;
+  }
+}
+
+.footer {
+  .loader {
+    margin-top: 10px;
+    text-align: center;
+  }
+}

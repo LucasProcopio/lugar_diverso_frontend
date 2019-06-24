@@ -9,6 +9,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-background-slideshow": "^1.0.4",
+    "react-burger-menu": "^2.6.10",
     "react-dom": "^16.8.6",
     "react-icons": "^3.7.0",
     "react-loader-spinner": "^2.3.0",

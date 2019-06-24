@@ -1,3 +1,9 @@
+.poem-wrapper {
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+}
 .selection-content {
   height: 60%;
   padding: 10px;

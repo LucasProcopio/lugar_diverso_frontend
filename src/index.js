@@ -7,7 +7,18 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import log from "./middleware/log";
 
-import { Navbar, Home, Poem, Wall, Event, Slider } from "./components";
+import {
+  Navbar,
+  MobileNavBar,
+  Home,
+  Poem,
+  Wall,
+  Event,
+  Slider,
+  Footer,
+  Admin,
+  Login
+} from "./components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.scss";
 
@@ -17,12 +28,20 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
-        <Navbar />
+        <div className="mobile-navbar">
+          <MobileNavBar />
+        </div>
+        <div className="navbar">
+          <Navbar />
+        </div>
         <Slider />
-        <Route exact={true} path="/home" component={Home} />
+        <Route exact={true} path="/" component={Home} />
         <Route path="/poem" component={Poem} />
         <Route path="/wall" component={Wall} />
         <Route path="/event" component={Event} />
+        <Route path="/admin" component={Admin} />
+        <Route path="/login" component={Login} />
+        <Footer />
       </div>
     </Router>
   </Provider>,
