@@ -19,7 +19,8 @@ import {
   Admin,
   Login,
   Accept,
-  CreateEvent
+  CreateEvent,
+  ConfigEvent
 } from "./components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.scss";
@@ -45,6 +46,7 @@ ReactDOM.render(
         <Route path="/login" component={Login} />
         <Route path="/accept-poems" component={Accept} />
         <Route path="/create-event" component={CreateEvent} />
+        <Route path="/config-event" component={ConfigEvent} />
         <Footer />
       </div>
     </Router>

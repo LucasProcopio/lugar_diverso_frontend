@@ -1,4 +1,4 @@
-import { FETCH_EVENTS } from "./eventAction";
+import { FETCH_EVENTS, DELETE_EVENT } from "./eventAction";
 
 export default function eventReducer(state = {}, action) {
   switch (action.type) {
@@ -7,6 +7,15 @@ export default function eventReducer(state = {}, action) {
         ...state,
         ...action.events
       };
+    case DELETE_EVENT: {
+      const filteredEvents = state.events.filter(event => {
+        return event.id !== action.event;
+      });
+      return {
+        ...state,
+        events: [...filteredEvents]
+      };
+    }
     default:
       return state;
   }

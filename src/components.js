@@ -10,6 +10,7 @@ import Footer from "./components/footer/Footer";
 import Login from "./components/Login/Login";
 import Accept from "./components/accept/Accept";
 import CreateEvent from "./components/create-event/CreateEvent";
+import ConfigEvent from "./components/config-events/ConfigEvent";
 export {
   Navbar,
   MobileNavBar,
@@ -22,5 +23,6 @@ export {
   Footer,
   Login,
   Accept,
-  CreateEvent
+  CreateEvent,
+  ConfigEvent
 };

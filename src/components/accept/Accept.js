@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import "../wall/wall.scss";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { MdReply } from "react-icons/md";
 
 class Accept extends React.Component {
   componentDidMount() {
@@ -47,6 +48,10 @@ class Accept extends React.Component {
     });
   };
 
+  handleBack = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const pageItems = [];
     if (this.props.pages !== "undefined") {
@@ -65,6 +70,9 @@ class Accept extends React.Component {
 
     return (
       <div className="container wall-container">
+        <div className="go-back" onClick={() => this.handleBack()}>
+          <MdReply size={26} color="#f1f1f1" className="go-back-icon" />
+        </div>
         <div className="content">
           <div className="poems-wrapper">
             {this.props.showLoading === true ? (

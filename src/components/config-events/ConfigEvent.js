@@ -1,13 +1,40 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchEvents } from "./eventAction";
 import Loader from "react-loader-spinner";
-import "./event.scss";
+import { confirmAlert } from "react-confirm-alert";
+import { verifyAuth } from "../../utils/helpers";
+import { deleteEvent, fetchEvents } from "../event/eventAction";
+import { MdReply } from "react-icons/md";
 
-class Event extends React.Component {
+import "./config-event.scss";
+import "react-confirm-alert/src/react-confirm-alert.css";
+
+class ConfigEvent extends React.Component {
   componentDidMount() {
+    verifyAuth(this.props);
     this.props.dispatch(fetchEvents(1));
   }
+
+  handleDelete = id => {
+    confirmAlert({
+      title: "Quer mesmo deletar ?",
+      message: "Are you sure to do this.",
+      buttons: [
+        {
+          label: "Sim",
+          onClick: () => this.props.dispatch(deleteEvent(id))
+        },
+        {
+          label: "Não",
+          onClick: () => null
+        }
+      ]
+    });
+  };
+
+  handleBack = () => {
+    this.props.history.goBack();
+  };
 
   render() {
     const pageItems = [];
@@ -27,6 +54,9 @@ class Event extends React.Component {
 
     return (
       <div className="container event-container">
+        <div className="go-back" onClick={() => this.handleBack()}>
+          <MdReply size={26} color="#f1f1f1" className="go-back-icon" />
+        </div>
         <div className="event-wrapper">
           {this.props.showLoading === true ? (
             <div className="event-loading">
@@ -63,6 +93,14 @@ class Event extends React.Component {
                         </li>
                       </ul>
                     </div>
+                    <div className="event-action">
+                      <button
+                        className="delete-event-btn"
+                        onClick={() => this.handleDelete(event.id)}
+                      >
+                        Deletar
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
@@ -79,6 +117,7 @@ class Event extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    token: state.loginReducer.token,
     events: state.eventReducer.events,
     total: state.eventReducer.count,
     pages: state.eventReducer.pages,
@@ -86,4 +125,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Event);
+export default connect(mapStateToProps)(ConfigEvent);

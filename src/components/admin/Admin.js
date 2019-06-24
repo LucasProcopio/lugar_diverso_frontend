@@ -19,6 +19,9 @@ class Admin extends React.Component {
           <NavLink to="/create-event" className="admin-item">
             Publicar eventos
           </NavLink>
+          <NavLink to="/config-event" className="admin-item">
+            Eventos publicados
+          </NavLink>
         </div>
       </div>
     );

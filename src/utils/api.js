@@ -31,6 +31,15 @@ export function deletePoemApi(id) {
   return axios.post(`${apiUrl}/delete/poem/${id}`);
 }
 
+export function createEvent(data) {
+  const config = { headers: { "Content-Type": "multipart/form-data" } };
+  return axios.post(`${apiUrl}/create/event`, data, config);
+}
+
+export function deleteEventApi(id) {
+  return axios.post(`${apiUrl}/delete/event/${id}`);
+}
+
 export function fetchEventsApi(page) {
   return axios(`${apiUrl}/events/${page}`);
 }
