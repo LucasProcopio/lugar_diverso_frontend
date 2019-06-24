@@ -1,4 +1,4 @@
-import { FETCH_ABOUT, FETCH_CONTACT } from "./homeAction";
+import { FETCH_ABOUT, FETCH_CONTACT, NETWORK_ERROR } from "./homeAction";
 
 export default function homeReducer(state = {}, action) {
   switch (action.type) {
@@ -15,6 +15,12 @@ export default function homeReducer(state = {}, action) {
         },
         contact: action.contact
       };
+    case NETWORK_ERROR: {
+      return {
+        ...state,
+        error: action.error
+      };
+    }
     default:
       return state;
   }

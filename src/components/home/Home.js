@@ -1,7 +1,7 @@
 import React from "react";
 import "./home.scss";
 import { fetchAbout, fecthContacts } from "./homeAction";
-
+import { Error } from "../error/Error";
 import Loader from "react-loader-spinner";
 import { IoIosSad } from "react-icons/io";
 
@@ -14,27 +14,78 @@ class Home extends React.Component {
     this.props.fetchContactData();
   }
   render() {
+    const { showAboutLoading, showContactLoading, errors } = this.props;
+    let about;
+    let join;
+    let contact;
+
+    if (!showAboutLoading && typeof errors === "undefined") {
+      about = (
+        <div className="history-desc">
+          {isEmpty(this.props.about) ? (
+            <div>
+              <IoIosSad className="sad-icon" />
+              <span>Nenhuma informação para mostrar</span>
+            </div>
+          ) : (
+            this.props.about[0].history
+          )}
+        </div>
+      );
+    } else if (errors !== "undefined") {
+      about = <Error message={errors} />;
+    }
+
+    if (!showAboutLoading && typeof errors === "undefined") {
+      join = (
+        <div className="join-desc">
+          {isEmpty(this.props.about) ? (
+            <div>
+              <IoIosSad className="sad-icon" />
+              <span>Nenhuma informação para mostrar</span>
+            </div>
+          ) : (
+            this.props.about[0].join_desc
+          )}
+        </div>
+      );
+    } else if (errors !== "undefined") {
+      join = <Error message={errors} />;
+    }
+
+    if (!showContactLoading && typeof errors === "undefined") {
+      contact = (
+        <div className="contact-info">
+          {this.props.contact.length === 0 ? (
+            <div>
+              <IoIosSad className="sad-icon" />
+              <span>Nenhuma informação para mostrar</span>
+            </div>
+          ) : (
+            <div>
+              {this.props.contact[0].phone}
+              <br />
+              {this.props.contact[0].email}
+            </div>
+          )}
+        </div>
+      );
+    } else if (errors !== "undefined") {
+      contact = <Error message={errors} />;
+    }
+
     return (
       <div className="container">
         <div className="home-wrapper">
           <div className="history">
             <div className="history-content">
               <h2>HISTÓRIA</h2>
-              {this.props.showAboutLoading === true ? (
+              {showAboutLoading ? (
                 <div className="loader">
                   <Loader type="Grid" color="#f1f1f1" height={70} width={70} />
                 </div>
               ) : (
-                <div className="history-desc">
-                  {isEmpty(this.props.about) ? (
-                    <div>
-                      <IoIosSad className="sad-icon" />
-                      <span>Nenhuma informação para mostrar</span>
-                    </div>
-                  ) : (
-                    this.props.about[0].history
-                  )}
-                </div>
+                about
               )}
             </div>
           </div>
@@ -49,21 +100,12 @@ class Home extends React.Component {
           <div className="home-info">
             <div className="how-to-join">
               <h2>COMO PARTICIPAR</h2>
-              {this.props.showAboutLoading === true ? (
+              {showAboutLoading ? (
                 <div className="loader">
                   <Loader type="Grid" color="#f1f1f1" height={70} width={70} />
                 </div>
               ) : (
-                <div className="join-desc">
-                  {isEmpty(this.props.about) ? (
-                    <div>
-                      <IoIosSad className="sad-icon" />
-                      <span>Nenhuma informação para mostrar</span>
-                    </div>
-                  ) : (
-                    this.props.about[0].join_desc
-                  )}
-                </div>
+                join
               )}
             </div>
             <div className="home-contact">
@@ -73,20 +115,7 @@ class Home extends React.Component {
                   <Loader type="Grid" color="#f1f1f1" height={70} width={70} />
                 </div>
               ) : (
-                <div className="contact-info">
-                  {this.props.contact.length === 0 ? (
-                    <div>
-                      <IoIosSad className="sad-icon" />
-                      <span>Nenhuma informação para mostrar</span>
-                    </div>
-                  ) : (
-                    <div>
-                      {this.props.contact[0].phone}
-                      <br />
-                      {this.props.contact[0].email}
-                    </div>
-                  )}
-                </div>
+                contact
               )}
             </div>
           </div>
@@ -97,13 +126,32 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => {
+  let error = state.homeReducer.error;
+  let about = state.homeReducer.about;
+  let contact = state.homeReducer.contact;
+
+  let showAboutLoading = true;
+  let showContactLoading = true;
+
+  if (typeof error !== "undefined") {
+    showAboutLoading = false;
+    showContactLoading = false;
+  }
+
+  if (typeof about !== "undefined") {
+    showAboutLoading = false;
+  }
+
+  if (typeof contact !== "undefined") {
+    showContactLoading = false;
+  }
+
   return {
     about: state.homeReducer.about,
     contact: state.homeReducer.contact,
-    showAboutLoading:
-      typeof state.homeReducer.about === "undefined" ? true : false,
-    showContactLoading:
-      typeof state.homeReducer.contact === "undefined" ? true : false
+    errors: state.homeReducer.error,
+    showAboutLoading: showAboutLoading,
+    showContactLoading: showContactLoading
   };
 };
 

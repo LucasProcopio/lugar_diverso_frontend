@@ -22,7 +22,7 @@ class MobileNavbar extends React.Component {
           onClick={() => this.closeMenu()}
           id="home"
           className="menu-item"
-          to="/home"
+          to="/"
         >
           O Lugar diverso
         </NavLink>

@@ -24,23 +24,21 @@ export function fetchEventsApi(page) {
 }
 
 export function auth(data) {
+  const login = {
+    email: data.email,
+    password: data.password
+  };
   const config = {
     headers: { "Content-Type": "application/json" },
     withCredentials: true
   };
-  return axios.post(`${apiUrl}/admin/auth`, data, config);
-}
-
-export function getAdmList() {
-  return axios.get(`${apiUrl}/admin/list`);
+  return axios.post(`${apiUrl}/admin/auth`, login, config);
 }
 
 export function checkAuth(token) {
+  const data = { token: token };
   const config = {
-    headers: {
-      Authorization: "Bearer " + token,
-      "Content-Type": "application/json"
-    }
+    headers: { Authorization: "bearer " + token }
   };
-  return axios.get(`${apiUrl}/admin/check-token`, config);
+  return axios.get(`${apiUrl}/admin/check-token?token=${token}`, data, config);
 }

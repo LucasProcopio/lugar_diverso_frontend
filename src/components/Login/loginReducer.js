@@ -5,7 +5,7 @@ export default function loginReducer(state = {}, action) {
     case FETCH_ADM_TOKEN:
       return {
         ...state,
-        ...action.token
+        token: action.token
       };
     default:
       return state;

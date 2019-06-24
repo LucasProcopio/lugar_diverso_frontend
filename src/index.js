@@ -35,7 +35,7 @@ ReactDOM.render(
           <Navbar />
         </div>
         <Slider />
-        <Route exact={true} path="/home" component={Home} />
+        <Route exact={true} path="/" component={Home} />
         <Route path="/poem" component={Poem} />
         <Route path="/wall" component={Wall} />
         <Route path="/event" component={Event} />
