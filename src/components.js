@@ -8,6 +8,8 @@ import Wall from "./components/wall/Wall";
 import Slider from "./components/slider/Slider";
 import Footer from "./components/footer/Footer";
 import Login from "./components/Login/Login";
+import Accept from "./components/accept/Accept";
+import CreateEvent from "./components/create-event/CreateEvent";
 export {
   Navbar,
   MobileNavBar,
@@ -18,5 +20,7 @@ export {
   Wall,
   Slider,
   Footer,
-  Login
+  Login,
+  Accept,
+  CreateEvent
 };
