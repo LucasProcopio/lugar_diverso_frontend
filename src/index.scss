@@ -68,7 +68,10 @@ img {
     height: 50px;
     line-height: 57px;
     border-radius: none;
-    margin: 10px auto;
+    margin: 5px auto;
+    position: absolute;
+    top: 0;
+    left: 0;
     .go-back-icon {
       color: #f1f1f1;
       margin-left: 25px;
@@ -78,6 +81,12 @@ img {
   }
 }
 
+.error {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #f1f1f1;
+  text-align: center;
+}
 // responsive design
 @media screen and (max-width: 1200px) {
   .container {

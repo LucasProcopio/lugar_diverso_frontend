@@ -1,4 +1,5 @@
 import { FETCH_EVENTS, DELETE_EVENT } from "./eventAction";
+import { NETWORK_ERROR } from "../home/homeAction";
 
 export default function eventReducer(state = {}, action) {
   switch (action.type) {
@@ -16,6 +17,11 @@ export default function eventReducer(state = {}, action) {
         events: [...filteredEvents]
       };
     }
+    case NETWORK_ERROR:
+      return {
+        ...state,
+        error: action.error
+      };
     default:
       return state;
   }

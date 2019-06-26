@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchAcceptedPoems } from "./wallAction";
 import Loader from "react-loader-spinner";
 import "./wall.scss";
+import { Error } from "../error/Error";
 
 class Wall extends React.Component {
   componentDidMount() {
@@ -10,9 +11,12 @@ class Wall extends React.Component {
   }
 
   render() {
+    const { pages, showLoading, error, poems } = this.props;
     const pageItems = [];
-    if (this.props.pages !== "undefined") {
-      for (let i = 1; i <= this.props.pages; i++) {
+    let poemData;
+
+    if (pages !== "undefined") {
+      for (let i = 1; i <= pages; i++) {
         pageItems.push(
           <span
             key={i}
@@ -25,39 +29,49 @@ class Wall extends React.Component {
       }
     }
 
+    if (!showLoading && typeof error === "undefined") {
+      if (poems.length === 0) {
+        poemData = <Error message="Ainda não foi cadastrado nenhum poema 😔" />;
+      } else {
+        poemData = poems.map((poem, index) => (
+          <div className="poem" key={index}>
+            {poem.image !== "" ? (
+              <div
+                className="poem-img"
+                style={{ backgroundImage: `url(${poem.image})` }}
+              />
+            ) : null}
+            <div className="poem-body">
+              <h3>{poem.title}</h3>
+              <p className="author">Por: {poem.author}</p>
+              <p className="poem-text">
+                {poem.text.split("\n").map((item, key) => {
+                  return (
+                    <span key={key}>
+                      {item}
+                      <br />
+                    </span>
+                  );
+                })}
+              </p>
+            </div>
+          </div>
+        ));
+      }
+    } else if (typeof error !== "undefined") {
+      poemData = <Error message={error} />;
+    }
+
     return (
       <div className="container wall-container">
         <div className="content">
           <div className="poems-wrapper">
-            {this.props.showLoading === true ? (
+            {showLoading === true ? (
               <div className="wall-loader">
                 <Loader type="Grid" color="#f1f1f1" height={100} width={100} />
               </div>
             ) : (
-              this.props.poems.map((poem, index) => (
-                <div className="poem" key={index}>
-                  {poem.image !== "" ? (
-                    <div
-                      className="poem-img"
-                      style={{ backgroundImage: `url(${poem.image})` }}
-                    />
-                  ) : null}
-                  <div className="poem-body">
-                    <h3>{poem.title}</h3>
-                    <p className="author">Por: {poem.author}</p>
-                    <p className="poem-text">
-                      {poem.text.split("\n").map((item, key) => {
-                        return (
-                          <span key={key}>
-                            {item}
-                            <br />
-                          </span>
-                        );
-                      })}
-                    </p>
-                  </div>
-                </div>
-              ))
+              poemData
             )}
           </div>
           <div className="wall-pagination">
@@ -70,11 +84,27 @@ class Wall extends React.Component {
 }
 
 const mapStateToProps = state => {
+  let poems = state.wallReducer.results;
+  let pages = state.wallReducer.pages;
+  let total = state.wallReducer.count;
+  let error = state.wallReducer.error;
+
+  let showLoading = true;
+
+  if (typeof error !== "undefined") {
+    showLoading = false;
+  }
+
+  if (typeof poems !== "undefined") {
+    showLoading = false;
+  }
+
   return {
-    poems: state.wallReducer.results,
-    pages: state.wallReducer.pages,
-    total: state.wallReducer.count,
-    showLoading: typeof state.wallReducer.results === "undefined" ? true : false
+    poems: poems,
+    pages: pages,
+    total: total,
+    error: error,
+    showLoading: showLoading
   };
 };
 

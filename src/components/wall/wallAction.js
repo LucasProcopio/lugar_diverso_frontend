@@ -4,6 +4,7 @@ import {
   acceptPoemApi,
   deletePoemApi
 } from "../../utils/api";
+import { netWorkError } from "../home/homeAction";
 export const FETCH_POEMS = "FETCH_POEMS";
 export const FETCH_NOT_ACCEPTED = "FETCH_NOT_ACCEPTED";
 export const ACCEPT_POEM = "ACCEPT_POEM";
@@ -11,17 +12,31 @@ export const DELETE_POEM = "DELETE_POEM";
 
 export const fetchAcceptedPoems = (page = 1) => {
   return dispatch => {
-    return fetchAccepetedPoemsApi(page).then(res => {
-      dispatch(fetchAcceptedPoemsSuccess(res.data));
-    });
+    return fetchAccepetedPoemsApi(page)
+      .then(res => {
+        dispatch(fetchAcceptedPoemsSuccess(res.data));
+      })
+      .catch(err => {
+        if (!err.status) {
+          const error = "Servidor indisponível";
+          dispatch(netWorkError(error));
+        }
+      });
   };
 };
 
 export const fetchNotAccepted = (page = 1) => {
   return dispatch => {
-    return fetchNotAcceptedApi(page).then(res => {
-      dispatch(fetchNotAcceptedSuccess(res.data));
-    });
+    return fetchNotAcceptedApi(page)
+      .then(res => {
+        dispatch(fetchNotAcceptedSuccess(res.data));
+      })
+      .catch(err => {
+        if (!err.status) {
+          const error = "Servidor indisponível";
+          dispatch(netWorkError(error));
+        }
+      });
   };
 };
 
