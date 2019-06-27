@@ -1,14 +1,58 @@
 import React from "react";
+import { fetchNotAccepted, deletePoem, acceptPoem } from "../wall/wallAction";
+import { verifyAuth } from "../../utils/helpers";
 import { connect } from "react-redux";
-import { fetchAcceptedPoems } from "./wallAction";
 import Loader from "react-loader-spinner";
+import { confirmAlert } from "react-confirm-alert";
+import { MdReply } from "react-icons/md";
 import { Error } from "../error/Error";
-import "./wall.scss";
 
-class Wall extends React.Component {
+import "../wall/wall.scss";
+import "react-confirm-alert/src/react-confirm-alert.css";
+
+class Accept extends React.Component {
   componentDidMount() {
-    this.props.dispatch(fetchAcceptedPoems(1));
+    verifyAuth(this.props);
+    this.props.dispatch(fetchNotAccepted(1));
   }
+
+  handleAccept = id => {
+    confirmAlert({
+      title: "Deseja mesmo aceitar este poema ?",
+      message: "Are you sure to do this.",
+      buttons: [
+        {
+          label: "Sim",
+          onClick: () => this.props.dispatch(acceptPoem(id))
+        },
+        {
+          label: "Não",
+          onClick: () => null
+        }
+      ]
+    });
+  };
+
+  handleDelete = id => {
+    confirmAlert({
+      title: "Quer mesmo deletar ?",
+      message: "Are you sure to do this.",
+      buttons: [
+        {
+          label: "Sim",
+          onClick: () => this.props.dispatch(deletePoem(id))
+        },
+        {
+          label: "Não",
+          onClick: () => null
+        }
+      ]
+    });
+  };
+
+  handleBack = () => {
+    this.props.history.goBack();
+  };
 
   render() {
     const { pages, showLoading, error, poems } = this.props;
@@ -21,7 +65,7 @@ class Wall extends React.Component {
           <span
             key={i}
             className="page-item"
-            onClick={() => this.props.dispatch(fetchAcceptedPoems(i))}
+            onClick={() => this.props.dispatch(fetchNotAccepted(i))}
           >
             {i}
           </span>
@@ -55,6 +99,21 @@ class Wall extends React.Component {
                 })}
               </p>
             </div>
+            <div className="button-wrapper">
+              <button
+                className="btn-poem accept-poem"
+                onClick={() => this.handleAccept(poem.id)}
+              >
+                Aceitar
+              </button>
+
+              <button
+                className="btn-poem delete-poem"
+                onClick={() => this.handleDelete(poem.id)}
+              >
+                Deletar
+              </button>
+            </div>
           </div>
         ));
       }
@@ -64,6 +123,9 @@ class Wall extends React.Component {
 
     return (
       <div className="container wall-container">
+        <div className="go-back" onClick={() => this.handleBack()}>
+          <MdReply size={26} color="#f1f1f1" className="go-back-icon" />
+        </div>
         <div className="content">
           <div className="poems-wrapper">
             {showLoading === true ? (
@@ -88,6 +150,7 @@ const mapStateToProps = state => {
   let pages = state.wallReducer.pages;
   let total = state.wallReducer.count;
   let error = state.wallReducer.error;
+  let token = state.loginReducer.token;
 
   let showLoading = true;
 
@@ -100,6 +163,7 @@ const mapStateToProps = state => {
   }
 
   return {
+    token: token,
     poems: poems,
     pages: pages,
     total: total,
@@ -108,4 +172,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Wall);
+export default connect(mapStateToProps)(Accept);

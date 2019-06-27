@@ -14,9 +14,30 @@ export function fetchAccepetedPoemsApi(page) {
   return axios.get(`${apiUrl}/poems/${page}`);
 }
 
+export function fetchNotAcceptedApi(page) {
+  return axios.get(`${apiUrl}/accept/poems/${page}`);
+}
+
 export function createPoem(data) {
   const config = { headers: { "Content-Type": "multipart/form-data" } };
   return axios.post(`${apiUrl}/create/poem`, data, config);
+}
+
+export function acceptPoemApi(id) {
+  return axios.post(`${apiUrl}/accept/poem/${id}`);
+}
+
+export function deletePoemApi(id) {
+  return axios.post(`${apiUrl}/delete/poem/${id}`);
+}
+
+export function createEvent(data) {
+  const config = { headers: { "Content-Type": "multipart/form-data" } };
+  return axios.post(`${apiUrl}/create/event`, data, config);
+}
+
+export function deleteEventApi(id) {
+  return axios.post(`${apiUrl}/delete/event/${id}`);
 }
 
 export function fetchEventsApi(page) {
@@ -41,4 +62,13 @@ export function checkAuth(token) {
     headers: { Authorization: "bearer " + token }
   };
   return axios.get(`${apiUrl}/admin/check-token?token=${token}`, data, config);
+}
+
+export function updateAdmApi(data) {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  return axios.put(`${apiUrl}/admin/update`, data, config);
 }

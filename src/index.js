@@ -17,7 +17,11 @@ import {
   Slider,
   Footer,
   Admin,
-  Login
+  Login,
+  Accept,
+  CreateEvent,
+  ConfigEvent,
+  Profile
 } from "./components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.scss";
@@ -41,6 +45,10 @@ ReactDOM.render(
         <Route path="/event" component={Event} />
         <Route path="/admin" component={Admin} />
         <Route path="/login" component={Login} />
+        <Route path="/accept-poems" component={Accept} />
+        <Route path="/create-event" component={CreateEvent} />
+        <Route path="/config-event" component={ConfigEvent} />
+        <Route path="/update-profile" component={Profile} />
         <Footer />
       </div>
     </Router>

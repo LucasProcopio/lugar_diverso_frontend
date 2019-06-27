@@ -1,7 +1,7 @@
 import React from "react";
 import { auth } from "../../utils/api";
 import { connect } from "react-redux";
-import { fetchAdmToken } from "./loginAction";
+import { fetchAdmToken, fetchAdmData } from "./loginAction";
 import { ToastContainer, toast } from "react-toastify";
 import { fetchAbout, fecthContacts } from "../home/homeAction";
 
@@ -42,7 +42,8 @@ class Login extends React.Component {
     auth(this.state)
       .then(res => {
         if (res.status === 200) {
-          this.props.fetchTokenData(res.data.token);
+          //this.props.fetchTokenData(res.data.token);
+          this.props.fetchAdm(res.data);
           this.props.history.push({
             pathname: "/admin"
           });
@@ -97,7 +98,8 @@ class Login extends React.Component {
 const mapDispatchToProps = dispatch => ({
   fetchAboutData: () => dispatch(fetchAbout()),
   fetchContactData: () => dispatch(fecthContacts()),
-  fetchTokenData: token => dispatch(fetchAdmToken(token))
+  fetchTokenData: token => dispatch(fetchAdmToken(token)),
+  fetchAdm: data => dispatch(fetchAdmData(data))
 });
 
 export default connect(
