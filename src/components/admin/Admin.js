@@ -22,6 +22,9 @@ class Admin extends React.Component {
           <NavLink to="/config-event" className="admin-item">
             Eventos publicados
           </NavLink>
+          <NavLink to="/update-profile" className="admin-item">
+            Atualizar Perfil
+          </NavLink>
         </div>
       </div>
     );
@@ -30,7 +33,9 @@ class Admin extends React.Component {
 
 const mapsStateToProps = state => {
   return {
-    token: state.loginReducer.token
+    token: state.loginReducer.token,
+    id: state.loginReducer.uuid,
+    email: state.loginReducer.email
   };
 };
 

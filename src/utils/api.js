@@ -63,3 +63,12 @@ export function checkAuth(token) {
   };
   return axios.get(`${apiUrl}/admin/check-token?token=${token}`, data, config);
 }
+
+export function updateAdmApi(data) {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  return axios.put(`${apiUrl}/admin/update`, data, config);
+}

@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchAcceptedPoems } from "./wallAction";
 import Loader from "react-loader-spinner";
-import "./wall.scss";
 import { Error } from "../error/Error";
+import "./wall.scss";
 
 class Wall extends React.Component {
   componentDidMount() {

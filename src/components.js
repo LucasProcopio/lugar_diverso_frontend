@@ -11,6 +11,7 @@ import Login from "./components/Login/Login";
 import Accept from "./components/accept/Accept";
 import CreateEvent from "./components/create-event/CreateEvent";
 import ConfigEvent from "./components/config-events/ConfigEvent";
+import Profile from "./components/profile/Profile";
 export {
   Navbar,
   MobileNavBar,
@@ -24,5 +25,6 @@ export {
   Login,
   Accept,
   CreateEvent,
-  ConfigEvent
+  ConfigEvent,
+  Profile
 };

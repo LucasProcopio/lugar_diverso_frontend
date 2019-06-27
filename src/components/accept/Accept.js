@@ -3,10 +3,12 @@ import { fetchNotAccepted, deletePoem, acceptPoem } from "../wall/wallAction";
 import { verifyAuth } from "../../utils/helpers";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
-import "../wall/wall.scss";
 import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import { MdReply } from "react-icons/md";
+import { Error } from "../error/Error";
+
+import "../wall/wall.scss";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 class Accept extends React.Component {
   componentDidMount() {
@@ -53,9 +55,12 @@ class Accept extends React.Component {
   };
 
   render() {
+    const { pages, showLoading, error, poems } = this.props;
     const pageItems = [];
-    if (this.props.pages !== "undefined") {
-      for (let i = 1; i <= this.props.pages; i++) {
+    let poemData;
+
+    if (pages !== "undefined") {
+      for (let i = 1; i <= pages; i++) {
         pageItems.push(
           <span
             key={i}
@@ -68,6 +73,54 @@ class Accept extends React.Component {
       }
     }
 
+    if (!showLoading && typeof error === "undefined") {
+      if (poems.length === 0) {
+        poemData = <Error message="Ainda não foi cadastrado nenhum poema 😔" />;
+      } else {
+        poemData = poems.map((poem, index) => (
+          <div className="poem" key={index}>
+            {poem.image !== "" ? (
+              <div
+                className="poem-img"
+                style={{ backgroundImage: `url(${poem.image})` }}
+              />
+            ) : null}
+            <div className="poem-body">
+              <h3>{poem.title}</h3>
+              <p className="author">Por: {poem.author}</p>
+              <p className="poem-text">
+                {poem.text.split("\n").map((item, key) => {
+                  return (
+                    <span key={key}>
+                      {item}
+                      <br />
+                    </span>
+                  );
+                })}
+              </p>
+            </div>
+            <div className="button-wrapper">
+              <button
+                className="btn-poem accept-poem"
+                onClick={() => this.handleAccept(poem.id)}
+              >
+                Aceitar
+              </button>
+
+              <button
+                className="btn-poem delete-poem"
+                onClick={() => this.handleDelete(poem.id)}
+              >
+                Deletar
+              </button>
+            </div>
+          </div>
+        ));
+      }
+    } else if (typeof error !== "undefined") {
+      poemData = <Error message={error} />;
+    }
+
     return (
       <div className="container wall-container">
         <div className="go-back" onClick={() => this.handleBack()}>
@@ -75,50 +128,12 @@ class Accept extends React.Component {
         </div>
         <div className="content">
           <div className="poems-wrapper">
-            {this.props.showLoading === true ? (
+            {showLoading === true ? (
               <div className="wall-loader">
                 <Loader type="Grid" color="#f1f1f1" height={100} width={100} />
               </div>
             ) : (
-              this.props.poems.map((poem, index) => (
-                <div className="poem" key={index}>
-                  {poem.image !== "" ? (
-                    <div
-                      className="poem-img"
-                      style={{ backgroundImage: `url(${poem.image})` }}
-                    />
-                  ) : null}
-                  <div className="poem-body">
-                    <h3>{poem.title}</h3>
-                    <p className="author">Por: {poem.author}</p>
-                    <p className="poem-text">
-                      {poem.text.split("\n").map((item, key) => {
-                        return (
-                          <span key={key}>
-                            {item}
-                            <br />
-                          </span>
-                        );
-                      })}
-                    </p>
-                  </div>
-                  <div className="button-wrapper">
-                    <button
-                      className="btn-poem accept-poem"
-                      onClick={() => this.handleAccept(poem.id)}
-                    >
-                      Aceitar
-                    </button>
-
-                    <button
-                      className="btn-poem delete-poem"
-                      onClick={() => this.handleDelete(poem.id)}
-                    >
-                      Deletar
-                    </button>
-                  </div>
-                </div>
-              ))
+              poemData
             )}
           </div>
           <div className="wall-pagination">
@@ -131,14 +146,29 @@ class Accept extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("RESULTS", state.wallReducer.results);
-  console.log("WALL RED", state.wallReducer);
+  let poems = state.wallReducer.results;
+  let pages = state.wallReducer.pages;
+  let total = state.wallReducer.count;
+  let error = state.wallReducer.error;
+  let token = state.loginReducer.token;
+
+  let showLoading = true;
+
+  if (typeof error !== "undefined") {
+    showLoading = false;
+  }
+
+  if (typeof poems !== "undefined") {
+    showLoading = false;
+  }
+
   return {
-    token: state.loginReducer.token,
-    poems: state.wallReducer.results,
-    pages: state.wallReducer.pages,
-    total: state.wallReducer.count,
-    showLoading: typeof state.wallReducer.results === "undefined" ? true : false
+    token: token,
+    poems: poems,
+    pages: pages,
+    total: total,
+    error: error,
+    showLoading: showLoading
   };
 };
 
